@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Tạo bàn cờ caro đơn giản</title>
+	<style>
+		*{
+			margin:0;
+			padding: 0;
+		}
+		#container{
+			width: 500px;
+			height: 300px;
+			margin:20px auto;
+
+		}
+		#container #header{
+			width: 100%;
+			height: 60px;
+		}
+		#container #header h1{
+			display: inline-block;
+		}
+		#container #header input{
+			float: right;
+			margin-top:10px;
+			margin-right: 15px;
+		}
+		#container #header hr{
+			width: 100%;
+			clear:both;
+		}
+		#container #result{
+		}
+		#container .box{
+			width:20px;
+			height: 20px;
+			border: 1px solid black;
+			display: inline-block;
+			transition: 0.3s;
+			cursor: pointer;
+		}
+		#container .box:hover{
+			background-color: #09ecb5;
+			border-radius: 3px;
+			border: 1px solid #6be66b;
+		}
+	</style>
+</head>
+<body>
+	<div id="container">
+		<div id="header">
+			<h1 >Simple Caro</h1>
+			<input type="button" id="btn_create" name="createmap" value="Create">
+			<input type="button" id="btn_reset" name="change" value="Reset">
+			<hr/>
+		</div>
+		<div id="result">
+			
+		</div>
+	</div>
+	<script type="text/javascript">
+		let btn_create = document.getElementById("btn_create");
+		let box = document.getElementById("box");
+		let result = document.getElementById("result");
+		let btn_reset = document.getElementById("btn_reset");
+		let map_array = [];
+		btn_reset.onclick=function(){
+			result.innerHTML ="";
+		};
+		btn_create.addEventListener('click',function(){
+			
+			let	map_size = Number(prompt("Nhập kích thước của map:(<=19)"));			
+			for(let i = 0;i<map_size;i++){
+				map_array[i] = new Array(0);
+				for(let j = 0;j<map_size;j++){
+					map_array[i][j] = "<div class='box' value='box"+i+""+j+"' onclick='Choose(this);'></div>" ;
+					result.innerHTML += map_array[i][j] + " ";					
+				}
+				result.innerHTML += "</br>";
+			}
+
+		});
+		function Choose(vl){
+			let choose_value = "";
+			do{
+				choose_value = prompt("Chọn giá trị x hay o");
+				if(choose_value=="x"||choose_value=="o")
+				{
+					break;
+				}
+				else{
+					console.log(choose_value);
+					alert("Giá trị nhập không chính xác, vui lòng nhập lại");
+				}
+			}while(true);
+
+			if(choose_value=="x")
+			{
+				vl.innerHTML = "<b>X</b>";
+			}
+			else{
+				vl.innerHTML = "<b>O</b>";
+			}
+		};
+	</script>
+</body>
+</html>
